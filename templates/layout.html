@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block page_title %}Main page{% endblock %} - Ask mate</title>
+    <link rel="stylesheet" href="static/style/style.css"/>
+</head>
+<body>
+<div class="content-wrapper">
+    <header>
+        <h1 id="header-title">Ask Mate! </h1><img src="/static/images/ask.png" alt="questions" width="180px">
+    </header>
+    <section>
+        {% block content %}{% endblock %}
+    </section>
+</div>
+</body>
+</html>

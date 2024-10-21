@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<body>
+    <h1>Edit Question</h1>
+    <form method="post" >
+        <label for="title">Title:</label><br>
+        <input type="text" size="{{ question_length }}" id="title" name="title" value="{{ question['title'] }}"><br>
+        <label for="message">Message:</label><br>
+        <textarea id="message" rows="5" cols="100" name="message">{{ question['message'] }}</textarea><br>
+        <input type="submit" value="Update">
+    </form>
+</body>
+
+{% endblock %}

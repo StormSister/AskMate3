@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<body>
+    <h1>Questions list</h1>
+    <form action="/list" method="GET">
+        <label for="order_by">Sort by:</label>
+        <select name="order_by" id="order_by">
+            <option value={{ order_by }}>{{ order_by }}</option>
+            <option value="submission_time">Submission Time</option>
+            <option value="view_number">View Number</option>
+            <option value="vote_number">Vote Number</option>
+            <option value="title">Title</option>
+        </select>
+
+        <label for="order_direction">Sort direction:</label>
+        <select name="order_direction" id="order_direction">
+            <option value={{ order_direction }}>{{ order_direction }}</option>
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+
+        <button class="button1 button3" type="submit">Sort</button>
+    </form>
+    <p>Questions sorted by {{ order_by | capitalize }} ({{ 'descending' if order_direction == 'desc' else 'ascending'}}):</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Submission Time</th>
+                <th>View Number</th>
+                <th>Vote Number</th>
+                <th>Title</th>
+                <th>Message</th>
+                <th>Image</th>
+                <th>Vote Up</th>
+                <th>Vote Down</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for question in questions %}
+            <tr>
+                <td><a class="select-link" href="/question/{{ question.id }}">{{ question.id }}</a></td>
+                <td>{{ question.submission_time }}</td>
+                <td>{{ question.view_number }}</td>
+                <td>{{ question.vote_number }}</td>
+                <td>{{ question.title }}</td>
+                <td>{{ question.message }}</td>
+{#                <td>{{ question.image }}</td>#}
+                {% if question.image == None %}
+                        <td class="image_center">🔲</td>
+                    {% else %}
+{#                        <td class="image_center">yes</td>#}
+                        <td class="image_center">
+                            <a class="no_underline" href="/image/{{ question.id }}">☑️</a>
+                        </td>
+{#                        <td><img src="/static/{{ question.image }}" width="75" alt="image uploaded by user"></img></td>#}
+                {% endif %}
+                <td>
+                    <form action="{{ url_for('vote_up', question_id=question.id) }}" method="POST">
+                        <button type="submit"> 👍</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="{{ url_for('vote_down', question_id=question.id) }}" method="POST">
+                        <button type="submit">👎</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="form3">
+        <form action="/add_question" method="get">
+            <button class="button1" type="submit">Add Your Question</button>
+        </form>
+        <form action="/">
+            <button class="button1" type="submit">Main Page</button>
+        </form>
+    </div>
+</body>
+
+{% endblock %}
+

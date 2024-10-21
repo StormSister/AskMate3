@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<body>
+    <h1>Add a New Answer</h1>
+    <form action="/question/{{ question_id }}/new-answer" method="POST">
+        <label for="message">Your Answer:</label><br>
+        <textarea id="message" rows="5" cols="100" name="message"></textarea><br>
+        <input type="submit" value="Submit">
+    </form><br>
+
+    <form action="/question/{{ question_id }}">
+        <button class="button1" type="submit">Back to question details</button>
+    </form>
+    <form action="/list">
+        <button class="button1" type="submit">List of Questions</button>
+    </form>
+    <form action="/">
+        <button class="button1" type="submit">Main Page</button>
+    </form>
+</body>
+
+{% endblock %}

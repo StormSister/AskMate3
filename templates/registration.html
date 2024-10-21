@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<body>
+    <div class="register">
+        <form action="/registration" method="POST">
+            <br>
+            <h3>Register</h3>
+            <table>
+                <tr>
+                    <td>
+                        <label for="email">Email:</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="email" id="email" name="email" required placeholder="email@email.com"><br><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="password">Password:</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="password" id="password" name="password" required placeholder="Enter password">
+                        <button class="button1" type="submit">Register</button><br><br>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+{% endblock %}

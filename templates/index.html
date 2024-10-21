@@ -1,0 +1,57 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="nav_bar">
+        <table>
+            <tr>
+                {% if 'user' not in session %}
+                    <td>
+                        <form class="form1">
+                            <button class="button1 button2" formaction="/registration" type="submit">Register</button>
+                            <button class="button1 button2" formaction="/login" type="submit">Login</button>
+                        </form>
+                    </td>
+                {% endif %}
+                {% if 'user' in session %}
+                    <td>
+                        <form class="form1">
+                            <button class="button1 button2" formaction="/user/{{ session['user'] }}" type="submit">My page</button>
+                            <button class="button1 button2" formaction="/users" type="submit">Users list</button>
+                            <button class="button1" formaction="/logout" type="submit">Logout</button>
+                        </form>
+                    </td>
+                {% endif %}
+                <td>
+                    <form class="form2" action="{{ url_for('search_results') }}" method="GET">
+                        <input type="text" name="q" placeholder="Search...">
+                        <input class="button1" type="submit" value="Search">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <h2>Latest Questions</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for question in latest_questions %}
+                <tr>
+                    <td>{{ question.title }}</td>
+                    <td>{{ question.message }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <form class="form3" action="/list">
+        <button class="button1" type="submit">Go to the Question List</button>
+    </form>
+
+{% endblock %}

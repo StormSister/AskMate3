@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question and Answers</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style_question.css') }}">
+</head>
+<body>
+    <div class="content-wrapper">
+        <header>
+            <h1>Ask Mate!</h1><img src="/static/images/ask.png" alt="questions" width="180px">
+        </header>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th colspan="3">Question {{ question_id }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if question %}
+                <tr>
+                    <td class="td_title" colspan="3">{{ question.title }}</td>
+                </tr>
+                <tr>
+                    <td class="td_message" colspan="3">{{ question.message }}</td>
+                </tr>
+                <tr>
+                    <td class="left_side_border" colspan="2">
+                        <div class="tag-buttons">
+                            {% for tag in tags %}
+                                <form>
+                                    <span>#{{ tag['name'] }}<button class="button button-tag" formaction="/question/{{ question_id }}/tag/{{ tag['tag_id'] }}/delete" type="submit">x</button></span>
+                                </form>
+                            {% endfor %}
+                        </div>
+                    </td>
+                    <td class="right_side_border">
+                        <div class="tag-add">
+                            <form>
+                                <button class="button button-tag" formmethod="get" formaction="/question/{{ question_id }}/new-tag" type="submit">Add tag</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+        <tr>
+            <td>
+                <div class="question-buttons">
+                    <form>
+                    <button class="button button1" formmethod="get" formaction="/question/{{ question_id }}/new-comment" type="submit">Add Comment</button>
+                    <button class="button button1" formmethod="get" formaction="/question/{{ question_id }}/edit" type="submit">Edit Question</button>
+                    <button class="button button-delete" formmethod="post" formaction="/question/{{ question_id }}/delete" type="submit">Delete Question</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+
+        {% if comments_to_question != [] %}
+            <tr>
+                <td>
+                    <div class="comments-section">
+                        <h3>Comments</h3>
+                    </div>
+                </td>
+            </tr>
+            {% for comment in comments_to_question %}
+                <tr>
+                    <td>
+                        <form>
+                            <div class="comment-buttons comments-section">
+                                <span>{{ comment.submission_time }} - "{{ comment.message }}"</span>
+                                <button class="button button-comment" formmethod="get" formaction="/comment/{{ comment.id }}/edit" type="submit">&#128393</button>
+                                <button class="button button-comment" formmethod="post" formaction="/comments/{{ comment.id }}/delete" type="submit">🗑️</button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table><br><br>
+
+    {% if answers != [] %}
+        <table>
+            <thead>
+                <tr>
+                    <td colspan="3" class="answers_top">
+                        <h2>Answers</h2>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for answer in answers %}
+                    <tr>
+                        <td class="answers">
+                            <span>{{ answer.submission_time }} - "{{ answer.message }}"</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="side_border answer_buttons">
+                            <form>
+                                <button class="button button1" formmethod="get" formaction="/answer/{{ answer.id }}/new-comment" type="submit">Add Comment</button>
+                                <button class="button button1" formmethod="get" formaction="/answer/{{ answer.id }}/edit" type="submit">Edit Answer</button>
+                                <button class="button button-delete" formmethod="post" formaction="/answer/{{ answer.id }}/delete" type="submit">Delete Answer</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% if comments_to_answers|selectattr('answer_id', 'equalto', answer.id)|list %}
+                        <tr>
+                            <td class="side_border">
+                                <div class="comments-section">
+                                    <h3>Comments</h3>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td class="side_border bottom">
+                        {% if comments_to_answers != [] %}
+                            {% for comment in comments_to_answers %}
+                                {% if comment.answer_id == answer.id %}
+                                    <form>
+                                        <div class="comment-buttons comments-section">
+                                            <span>{{ comment.submission_time }} - "{{ comment.message }}"</span>
+                                            <button class="button button-comment" formmethod="get" formaction="/comment/{{ comment.id }}/edit" type="submit">&#128393</button>
+                                            <button class="button button-comment" formmethod="post" formaction="/comments/{{ comment.id }}/delete" type="submit">🗑️</button>
+                                            {% if comment.edited_count != None %}
+                                                <span class="edited_note">(Times edited: {{ comment.edited_count }})</span>
+                                            {% endif %}
+                                        </div>
+                                    </form>
+                                {% endif %}
+                            {% endfor %}
+                            <br>
+                        {% endif %}
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table><br><br>
+    {% endif %}
+    <table>
+        <tr>
+            <td>
+                <form>
+                    <button class="button button1" formmethod="get" formaction="/question/{{ question_id }}/new-answer" type="submit">Add Your Answer</button>
+                    <button class="button button1" formaction="/list" type="submit">Back to Questions List</button>
+                    <button class="button button1" formaction="/" type="submit">Main Page</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+
+</body>
+</html>

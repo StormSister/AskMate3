@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<body>
+    {% if results == 'No results' %}
+        <h1>No results...</h1>
+    {% else %}
+        <h1>Search Results</h1>
+        <br>pip install bcrypt
+        <ul>
+            {% for question in results %}
+                <li>
+                <h2>Title: {{ question.title|safe }}</h2>
+                <p>Question: {{ question.message|safe }}</p>
+                {% if question.answers %}
+                    <h3>Answers:</h3>
+                    <ul>
+                        {% for answer in question.answers %}
+                            <p>{{ answer.message|safe }}</p>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form action="/">
+        <button class="button1" type="submit">Main Page</button>
+    </form>
+</body>
+{% endblock %}

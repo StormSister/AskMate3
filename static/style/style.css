@@ -1,0 +1,151 @@
+.content-wrapper {
+  text-align: center;
+  font-size: large;
+}
+
+.footer {
+  text-align: end;
+  font-size: medium;
+  color-interpolation: linearRGB;
+}
+
+.search {
+  background-color:indianred;
+}
+
+.text-center{
+  color: indianred;
+  text-align: center;
+  text-emphasis-color:rebeccapurple;
+}
+
+.image_center {
+  text-align: center;
+}
+
+.no_underline {
+  text-decoration: none;
+}
+
+select {
+  background-color: white;
+}
+
+#button {
+  background-color: antiquewhite;
+}
+
+body {
+  background-color: whitesmoke;
+}
+
+html {
+  font-family: Century;
+  font-size: small;
+
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  letter-spacing: 1px;
+  font-size: medium;
+  align-self: center;
+}
+
+td, th {
+  padding: 10px 20px;
+}
+
+th {
+  background-color: blanchedalmond;
+}
+
+td {
+  text-align: left;
+}
+
+tr:nth-child(even) td {
+  background-color: white;
+}
+
+tr:nth-child(odd) td {
+  background-color: ghostwhite;
+  color-interpolation: linearRGB;
+}
+
+caption {
+  padding: 10px;
+}
+
+.button1 {
+  border: 1px solid #e7e7e7;
+  padding: 5px 3px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: small;
+  margin: 5px 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: whitesmoke;
+}
+
+.button1:hover {
+  background-color: blanchedalmond;
+}
+
+.button2 {
+  background-color: blanchedalmond;
+}
+
+.button3 {
+  display: inline-block;
+}
+
+.button2:hover {
+  background-color: whitesmoke;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.new_tag_window {
+  display: none;
+}
+
+.nav_bar {
+  margin: 5px;
+}
+
+.nav_bar table tr td {
+  padding: 3px;
+  background-color: whitesmoke;
+  width: 90%;
+}
+
+.form1 {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.form2 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form3 {
+  display: flex;
+  justify-content: center;
+}
+
+.register tr td {
+  background-color: whitesmoke;
+  padding: 3px;
+}
+
+.register button {
+  display: inline-block;
+}
