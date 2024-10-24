@@ -4,11 +4,11 @@ import psycopg2
 import psycopg2.extras
 
 env_variables = {
-    "PSQL_USER_NAME": "ania",
-    "PSQL_PASSWORD": "ania123",
+    "PSQL_USER_NAME": "",
+    "PSQL_PASSWORD": "",
     "PSQL_HOST": "localhost",
     "PSQL_DB_NAME": "AskMate3",
-    "PSQL_PORT": "5432"
+    "PSQL_PORT": ""
 }
 for key in env_variables:
     os.environ[key] = env_variables[key]
